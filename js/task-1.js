@@ -1,34 +1,35 @@
 "use strict";
-console.log(
-  isEnoughCapacity({ apples: 2, grapes: 3, carrots: 1 }, 8)
-); // true
+const customer = {
+  username: "Mango",
+  balance: 24000,
+  discount: 0.1,
+  orders: ["Burger", "Pizza", "Salad"],
+ 
+ getBalance() {
+    return this.balance;
+  },
 
-console.log(
-  isEnoughCapacity({ apples: 4, grapes: 6, lime: 16 }, 12)
-); // false
+  getDiscount() {
+    return this.discount;
+  },
 
-console.log(
-  isEnoughCapacity({ apples: 1, lime: 5, tomatos: 3 }, 14)
-); // true
+  setDiscount(value) {
+    this.discount = value;
+  },
 
-console.log(
-  isEnoughCapacity({ apples: 18, potatos: 5, oranges: 2 }, 7)
-); // false
+  getOrders() {
+    return this.orders;
+  },
 
-function isEnoughCapacity(products, containerSize) {
-  const total = Object.values(products);
-  let size = 0;
-  for (const numb of total) {
-    size += numb
-   
-  }
-   if (size < containerSize) {
-    return true
-    
-  }
-  else {
-    return false
-  }
-    
-  
-}
+  addOrder(cost, order) {
+    this.balance -= cost - (cost * this.discount);
+    this.orders.push(order);
+  },
+ 
+};
+
+customer.setDiscount(0.15);
+console.log(customer.getDiscount()); // 0.15
+customer.addOrder(5000, "Steak");
+console.log(customer.getBalance()); // 19750
+console.log(customer.getOrders()); // ["Burger", "Pizza", "Salad", "Steak"]
